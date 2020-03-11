@@ -1,0 +1,4 @@
+PeripheralControl.c:28:7:WriteMotor	32	static
+PeripheralControl.c:44:9:GetVoltsValueADC	24	static
+PeripheralControl.c:59:9:GetTempVal	112	static
+PeripheralControl.c:67:7:ReadBlueTooth	16	static
