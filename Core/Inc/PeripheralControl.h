@@ -29,9 +29,10 @@
 
 /* Exported functions prototypes ---------------------------------------------*/
 void WriteMotor(Pin_Mapping motorPin, GPIO_PinState state);
-double GetVoltsValueADC(ADC_HandleTypeDef hadc, ADC_ChannelConfTypeDef adc_Config, uint32_t channel);
-void ReadBlueTooth(char dataBuffer);
-double GetTempVal(void);
+double GetVoltsValueADC(ADC_HandleTypeDef hadc, ADC_ChannelConfTypeDef adc_Config);
+char ReadBlueTooth(UART_HandleTypeDef huartx);
+double GetTempVal(ADC_HandleTypeDef hadcx, ADC_ChannelConfTypeDef config);
+void ResetMotors(void);
 
 #endif /* PERIPHERALCONTROL_H_ */
 /************************ (C) COPYRIGHT UMSATS *****END OF FILE****/

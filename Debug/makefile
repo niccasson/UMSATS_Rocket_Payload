@@ -8,6 +8,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -32,13 +36,16 @@ default.size.stdout \
 OBJDUMP_LIST += \
 RocketPayloadCode.list \
 
+OBJCOPY_BIN += \
+RocketPayloadCode.bin \
+
 
 # All Target
 all: RocketPayloadCode.elf secondary-outputs
 
 # Tool invocations
-RocketPayloadCode.elf: $(OBJS) $(USER_OBJS) C:\Users\niccasson\STM32CubeIDE\workspace_1.1.0\RocketPayloadCode\STM32F401RETX_FLASH.ld
-	arm-none-eabi-gcc -o "RocketPayloadCode.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\niccasson\STM32CubeIDE\workspace_1.1.0\RocketPayloadCode\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RocketPayloadCode.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+RocketPayloadCode.elf: $(OBJS) $(USER_OBJS) C:\Users\NicCa\Desktop\UMSATS_Code\UMSATS_Rocket_Payload\STM32F401RETX_FLASH.ld
+	arm-none-eabi-gcc -o "RocketPayloadCode.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\NicCa\Desktop\UMSATS_Code\UMSATS_Rocket_Payload\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RocketPayloadCode.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -52,12 +59,17 @@ RocketPayloadCode.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+RocketPayloadCode.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "RocketPayloadCode.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

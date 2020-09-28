@@ -1,0 +1,24 @@
+PROCESSOR PIN MAPPINGS (STM32F401RE)
+====================================
+
+ADC
+===
+
+PA6 - ADC1_IN6 -> D12 - Solar battery level input
+PA7 - ADC1_IN7 -> D11 - System battery level input
+PB0 - ADC1_IN8 -> A3 - Temperature sensor (temp)
+
+GPIO
+====
+
+PB4 - GPIO_Output -> 
+PB5 - GPIO_Output -> 
+PA10 - GPIO_Output -> D2 - Enable A (en_A)
+PC1 - GPIO_Output -> A4 - Enable B (en_B)
+
+USART
+=====
+
+PA2 - USART2_TX -> D1
+PA3 - USART2_RX -> D0
+PA4 - USART2_CK -> A2

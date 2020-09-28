@@ -29,7 +29,6 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "PeripheralControl.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -40,11 +39,6 @@ extern "C" {
 /* USER CODE BEGIN ET */
 
 /* USER CODE END ET */
-
-/* Public variables ----------------------------------------------------------*/
-extern ADC_HandleTypeDef hadc1;
-extern ADC_ChannelConfTypeDef sConfig;
-extern UART_HandleTypeDef huart1;
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
